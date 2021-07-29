@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/_cart.css">
+</head>
+
+<body style="font-size: 16px;">
+    <!-- 购物车主页 -->
+    <div class="shopping-cart-home-page">
+        <div class="shopping_Cart">
+            <div class="_Cart">
+                <div class="cart_back"></div>
+                <div class="cart_text">购物车</div>
+            </div>
+            <div class="cart-list">
+                <div class="select-btn"></div>
+                <div class="image-wrap">
+                    <div class="image"><img src="//vueshop.glbuys.com/uploadfiles/1524556409.jpg" alt=""></div>
+                    <div class="del">删除</div>
+                </div>
+                <div class="goods-wrap">
+                    <div class="goods-title">高跟鞋女2018新款春季单鞋仙女甜美链子尖头防水台细跟女鞋一字带</div>
+                    <div class="goods-attr">
+                        <span>颜色： 紫色</span>
+                        <span>尺码： 38</span>
+                    </div>
+                    <div class="buy-wrap">
+                        <div class="price1">￥<input type="text" name="price" value="12.8"></div>
+                        <div class="amount-input-wrap">
+                            <div class="btn dec" onclick="minus(0)">-</div>
+                            <div class="amount-input">
+                                <input type="tel" name="amount" value="1">
+                            </div>
+                            <div class="btn inc" onclick="plus(0)">+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-list">
+                <div class="select-btn"></div>
+                <div class="image-wrap">
+                    <div class="image"><img src="//vueshop.glbuys.com/uploadfiles/1484284030.jpg" alt=""></div>
+                    <div class="del">删除</div>
+                </div>
+                <div class="goods-wrap">
+                    <div class="goods-title">裙装裙装6</div>
+                    <div class="goods-attr">
+                        <span>颜色： 黑色</span>
+                        <span>尺寸： 36</span>
+                    </div>
+                    <div class="buy-wrap">
+                        <div class="price1">￥<input type="text" name="price" value="100"></div>
+                        <div class="amount-input-wrap">
+                            <div class="btn dec" onclick="minus(1)">-</div>
+                            <div class="amount-input">
+                                <input type="tel" name="amount" value="1">
+                            </div>
+                            <div class="btn inc" onclick="plus(1)">+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shopping_warp">
+                <div class="settlement_one">
+                    <div class="cart_two">
+                        <div class="Select_all_btn"></div>
+                        <div class="select_all">全选</div>
+                    </div>
+                    <div class="total_wp">
+                        运费 <span>￥20</span>
+                        合计:<span style="color: #cc0004;">￥</span> <span id="money">0</span>
+                    </div>
+                </div>
+                <div class="settlement settlement_odd">去结算</div>
+            </div>
+        </div>
+    </div>
+    <!-- 底部开始 -->
+    <div class="botton-btn">
+        <ul class="home_page">
+            <li></li>
+            <li>首页</li>
+        </ul>
+        <ul class="Shopping_Cart active11">
+            <li></li>
+            <li>购物车</li>
+            <li class="spot"></li>
+        </ul>
+        <ul class="Personal_Center">
+            <li></li>
+            <li>我的</li>
+        </ul>
+    </div>
+
+    <div class="load" style="display: none;"></div>
+    <script src="./js/price_calculation.js"></script>
+    <script src="../javascripts/jquery3.3.1.js"></script>
+
+    <script>
+        var ocart_two = document.querySelector('.cart_two');
+        var oSelect_all_btn = document.querySelector('.Select_all_btn');
+        var oselect_btn0 = document.querySelectorAll('.select-btn')[0];
+        var oselect_btn1 = document.querySelectorAll('.select-btn')[1];
+        var osettlement_odd = document.querySelector('.settlement_odd');
+        var off = true;
+        ocart_two.onclick = function () {
+            if (off) {
+                oSelect_all_btn.className = 'active1 Select_all_btn';
+                oselect_btn0.className = 'active1 select-btn';
+                oselect_btn1.className = 'active1 select-btn';
+                osettlement_odd.className = 'settlement'
+            } else {
+                oSelect_all_btn.className = 'Select_all_btn';
+                oselect_btn0.className = 'select-btn';
+                oselect_btn1.className = 'select-btn';
+                osettlement_odd.className = 'settlement_odd settlement'
+            }
+            off = !off;
+        }
+    </script>
+
+    <!-- 价格计算 -->
+    <script>
+        function minus(index) {
+            //获取当前数量的值
+            var amounts = document.getElementsByName("amount");
+
+            //得到第一个amount的元素的value属性的值
+            var count = parseInt(amounts[index].value);
+            if (count <= 1) {
+                count = 1
+            } else {
+                //得到第一个amount的元素的value属性的值
+                var count = parseInt(amounts[index].value) - 1; //数量加1
+
+                //重新把count的值绑定在数量文本框里
+                amounts[index].value = count;
+                var prices = document.getElementsByName("price");
+                var price = parseFloat(prices[index].value);
+                var totalMoney = ((price * Math.pow(10, 2)) * count) / Math.pow(10, 2);
+                document.getElementById('money').innerHTML = totalMoney;
+            }
+            total();
+        }
+        function plus(index) {
+
+            //获取当前数量的值
+            var amounts = document.getElementsByName("amount");
+
+            //得到第一个amount的元素的value属性的值
+            var count = parseInt(amounts[index].value) + 1; //数量加1
+
+            //重新把count的值绑定在数量文本框里
+            amounts[index].value = count;
+
+            //当前操作端口的价格也要重新计算
+            //得到当前端口的单价
+            var prices = document.getElementsByName("price");
+            var price = parseFloat(prices[index].value);
+            //乘以Math.pow(10,2)的原因为避免失真
+            var totalMoney = ((price * Math.pow(10, 2)) * count) / Math.pow(10, 2);
+
+            //把当前价格显示在文本中
+            document.getElementById('money').innerHTML = totalMoney;
+
+            total();
+        }
+
+        function total() {
+
+            //得到所有的数量
+            var counts = document.getElementsByName("amount");
+
+            //得到所有的单价
+            var prices = document.getElementsByName("price");
+
+            var sumMoney = 0;
+
+            for (var i = 0; i < counts.length; i++) {
+
+                //乘以Math.pow(10,2)的原因为避免失真
+                sumMoney += (parseFloat(prices[i].value) * Math.pow(10, 2) * parseInt(counts[i].value) / Math.pow(10, 2));
+            }
+            //把总金额显示再指定的元素中
+            document.getElementById('money').innerHTML = sumMoney;
+        }
+
+    </script>
+</body>
+
+</html>

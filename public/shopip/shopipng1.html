@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商城</title>
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/index1.css">
+    <link rel="stylesheet" href="./css/Member_login.css">
+    <link rel="stylesheet" href="./css/swiper-bundle.min.css">
+</head>
+
+<body style="font-size: 16px;">
+    <div class="homepage">
+        <!-- 首页 -->
+        <div class="nav total" style="display: block;">
+            <!-- 搜索栏头部 -->
+            <div class="nav_header">
+                <div class="nav_one"></div>
+                <div class="search-top">
+                    <a class="nav_two" href="#"></a>
+                    <div class="input">请输入宝贝名称</div>
+                </div>
+                <div class="nav_three" onclick="javascript:history.go(-1);tt(this.style.display='none')">登录</div>
+            </div>
+            <!-- 轮播图 -->
+            <div class="swiper_lbt">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+            <!-- 分类资源 -->
+            <div class="classification">
+            </div>
+            <!-- 潮流女装 -->
+            <div class="goods-main">
+                <div class="classify-name color-0">
+                    —— 潮流女装 ——
+                </div>
+                <div class="goods-row-1">
+                </div>
+                <div class="goods-row-2">
+                </div>
+            </div>
+            <!-- 品牌男装 -->
+            <div class="goods-main">
+                <div class="classify-name color-1">
+                    —— 品牌男装 ——
+                </div>
+                <div class="goods-row-1">
+
+                </div>
+                <div class="goods-row-2">
+                </div>
+            </div>
+            <!-- 电脑办公 -->
+            <div class="goods-main">
+                <div class="classify-name color-2">
+                    —— 电脑办公 ——
+                </div>
+                <div class="goods-row-1">
+                </div>
+                <div class="goods-row-2">
+                </div>
+            </div>
+            <!-- 为你推荐 -->
+            <div class="recommend_you">
+                <div class="wool"></div>
+                <div class="recom-wrap">
+                    <div class="icon"></div>
+                    <div class="text">为您推荐</div>
+                </div>
+                <div class="wool"></div>
+            </div>
+            <!-- 服装分类 -->
+            <div class="clothing">
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部开始 -->
+    <div class="bottom-btn">
+        <ul class="home_page active11">
+            <li></li>
+            <li>首页</li>
+        </ul>
+        <ul class="Shopping_Cart">
+            <li></li>
+            <li>购物车</li>
+            <li class="spot"></li>
+        </ul>
+        <ul class="Personal_Center">
+            <li></li>
+            <li>我的</li>
+        </ul>
+    </div>
+
+    <div class="load" style="display: none;"></div>
+
+    <script src="./js/remstyle.js"></script>
+    <script src="./js/drop_Down.js"></script>
+    <script src="../javascripts/axios.js"></script>
+    <script src="../javascripts/better-scroll.js"></script>
+    <script src="../javascripts/template-web.js"></script>
+    <script src="./js/shopipng1.js"></script>
+    <script src="../javascripts/jquery3.3.1.js"></script>
+    <script src="./js/swiper-bundle.min.js"></script>
+    <script>
+        axios.get('/cmap').then((res) => {
+            console.log(res);
+            var ogoods_ele_main = document.querySelector('.swiper-wrapper');
+            ogoods_ele_main.innerHTML = `
+                        <div class="swiper-slide" style="width: 375px;">
+                            <img src="${res.data.idf[0].image}" alt="">
+                        </div>
+                        <div class="swiper-slide" style="width: 375px;">
+                            <img src="${res.data.idf[1].image}" alt="">
+                        </div>
+                        <div class="swiper-slide" style="width: 375px;">
+                            <img src="${res.data.idf[2].image}" alt="">
+                        </div>
+            `
+            var mySwiper = new Swiper('.swiper-container', {
+                autoplay: true, //启动自动切换
+                loop: true, // 循环模式选项
+                speed: 100, //切换速度
+                /*   effect: "flip", //实现3D效果 */
+                //initialSlide :1,//设置为1后，Swiper初始化时activeSlide成了第2个
+
+                // 如果需要分页器
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+            });
+        });
+    </script>
+    <script id="aaa" type="text/html">
+        {{each sid}}
+            <ul class="resources">
+                <li><img src="{{$value.image}}" alt=""></li>
+                <li>{{$value.title}}</li>
+            </ul>
+        {{/each}}
+    </script>
+
+    <!-- 分类资源导航栏 -->
+    <script>
+        var sportsList = document.querySelector('.classification');
+        var osportsList = sportsList.children;
+        axios.get('/string').then((res) => {
+            /*  console.log(res.data.sid); */
+            sportsList.innerHTML = template('aaa', res.data);
+        }).then(() => {
+            for (var i = 0; i < osportsList.length; i++) {
+                osportsList[i].onclick = function () {
+                    window.location.href = "search_menu.html";
+                }
+            }
+        })
+    </script>
+
+    <script id="kkk" type="text/html">
+        {{each idf}}
+            <dl class="clothing_dl">
+                <dt class="clothing_img"><img src="{{$value.image}}" alt=""></dt>
+                <dd class="clothing_text">{{$value.title}}</dd>
+                <dd class="clothing_money">￥{{$value.price}}</dd>
+            </dl>
+        {{/each}}
+    </script>
+
+    <script>
+        var clothingList = document.querySelector('.clothing');
+        axios.get('/list3').then((res) => {
+            /*  console.log(res.data.idf); */
+            clothingList.innerHTML = template('kkk', res.data);
+
+            var oclothing_dl = document.querySelectorAll('.clothing_dl');
+            /* console.log(oclothing_dl.length);
+            console.log(res)
+            console.log(res.data.idf[0].gid); */
+            for (let i = 0; i < oclothing_dl.length; i++) {
+                oclothing_dl[i].onclick = function () {
+                    window.localStorage.setItem('gid', res.data.idf[i].gid)
+                    window.location.href = "details.html";
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

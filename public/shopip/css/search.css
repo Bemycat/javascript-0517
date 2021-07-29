@@ -1,0 +1,38 @@
+html {
+    font-size: 50.026668294270834px;
+}
+
+.search {
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+}
+
+.search_header {
+    width: 100%;
+    height: 1rem;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #efefef;
+}
+
+.back {
+    width: .8rem;
+    height: .8rem;
+    background-image: url();
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.search_b {
+    width: 80%;
+    height: .69rem;
+    border: 1px solid #b2b2b2;
+    border-radius: .1rem;
+    font-size: .28rem;
+    color: #626262;
+    line-height: .69rem;
+    padding-left: .2rem;
+}

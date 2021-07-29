@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/Receiving_address.css">
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/address.css">
+</head>
+
+<body style="font-size: 16px;">
+    <div class="page">
+        <div class="sub-header">
+            <div class="back" onclick="javascript:history.go(-1);tt(this.style.display='none')"></div>
+            <div class="title">收货地址管理</div>
+        </div>
+        <div class="main" style="display:none">
+            <ul>
+                <li>收货人</li>
+                <li><input type="text" placeholder="收货人姓名"></li>
+            </ul>
+            <ul>
+                <li>联系方式</li>
+                <li><input type="text" placeholder="联系人手机号"></li>
+            </ul>
+            <ul>
+                <li>所在地区</li>
+                <li><input type="text" placeholder="请选择所在地区" readonly class="area"></li>
+            </ul>
+            <ul>
+                <li>详细地址</li>
+                <li><input type="text" placeholder="街道详细地址"></li>
+            </ul>
+            <ul>
+                <li>设置为默认地址</li>
+                <li><input type="checkbox"></li>
+            </ul>
+            <button type="button" class="submit-save">保存</button>
+        </div>
+        <div class="add-btn">+ 添加新地址</div>
+    </div>
+
+    <div class="load" style="display: none;"></div>
+
+    <script src="./js/Receiving_address.js"></script>
+</body>
+
+</html>

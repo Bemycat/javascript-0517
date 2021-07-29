@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商城分类</title>
+    <link rel="stylesheet" href="./css/search_menu.css">
+    <link rel="stylesheet" href="./css/public.css">
+</head>
+
+<body style="font-size: 16px;">
+    <!-- 商城分类 -->
+    <div class="page">
+        <div class="search-header">
+            <a class="back" href="./shopipng1.html"></a>
+            <div class="search">请输入宝贝名称</div>
+        </div>
+        <!-- 商品分类 -->
+        <div class="goods-main">
+            <!-- 左侧菜单 -->
+            <div class="classify-wrap">
+                <ul id="uli"></ul>
+            </div>
+            <div class="goods-content">
+                <!-- 右侧菜单 -->
+                <div class="goods-content-main">
+                    <div id="goods-content_li">
+                        <div class="goods-wrap"></div>
+                        <div class="goods-wrap"></div>
+                        <div class="goods-wrap"></div>
+                        <div class="goods-wrap"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 最近搜索与常用搜索 -->
+        <div class="search-component" style="display: none;">
+            <div class="search-header">
+                <a class="close" href=""></a>
+                <div class="search-wrap">
+                    <div class="search-input-wrap">
+                        <input type="text" placeholder="请输入宝贝名称" class="search">
+                    </div>
+                    <button class="search-btn"></button>
+                </div>
+            </div>
+            <div class="search-main">
+                <div class="search-title-wrap">
+                    <div class="search-title">最近搜索</div>
+                    <div class="bin"></div>
+                </div>
+                <div class="search-keywords-wrap">
+                    <div class="keywords">连衣裙</div>
+                </div>
+            </div>
+            <div class="search-main">
+                <div class="search-title-wrap">
+                    <div class="search-title">热门搜索</div>
+                </div>
+                <div class="search-keywords-wrap">
+                    <div class="keywords">0000</div>
+                    <div class="keywords">连衣裙</div>
+                    <div class="keywords">连衣裙</div>
+                    <div class="keywords">连衣裙</div>
+                    <div class="keywords"></div>
+                    <div class="keywords">连衣裙</div>
+                    <div class="keywords">连衣裙</div>
+                    <div class="keywords">连衣裙</div>
+                    <div class="keywords">连衣裙</div>
+                    <div class="keywords">连衣裙</div>
+                    <div class="keywords">连衣裙</div>
+                    <div class="keywords">连衣裙</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="load" style="display: none;"></div>
+
+    <div class="van-overlay" style="z-index: 2001; display: none;" aria-labelledby="确认要删除吗？">
+        <div class="van-dialog__content">
+            <div class="van-dialog__message">确认要删除吗？</div>
+        </div>
+        <div class="van-hairline--top van-dialog__footer van-dialog__footer--buttons">
+            <button class="van-button van-button--default van-button--large van-dialog__cancel">
+                <span class="van-button__text">取消</span>
+            </button>
+            <button class="van-button van-button--default van-button--large van-dialog__confirm van-hairline--left">
+                <span class="van-button__text">确定</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="../javascripts/axios.js"></script>
+    <script src="../javascripts/better-scroll.js"></script>
+    <script src="../javascripts/template-web.js"></script>
+    <script src="./js/search_menu.js"></script>
+
+    <!-- 左侧渲染 -->
+    <script id="aaa1" type="text/html">
+            {{each idnb}}
+                <li class="classify-item">{{$value.title}}</li>
+            {{/each}}
+    </script>
+
+    <!-- 商品分类 左侧菜单/右侧菜单渲染数据 -->
+    <script>
+        var sportsList1 = document.querySelector('#uli');
+        axios.get('/list5').then((res) => {
+            /*  console.log(res.data.idnb); */
+            sportsList1.innerHTML = template('aaa1', res.data);
+
+            var oclassify_item = document.querySelectorAll('.classify-item');
+            document.querySelector('.classify-item').classList.add('active');
+            var ogoods_content_main = document.querySelector('.goods-content-main');
+            /* var ogoods_wrap = document.querySelectorAll('.goods-wrap'); */
+            /* console.log(oclassify_item.length);
+            console.log(res);
+            console.log(res.data.idnb[0].cid); */
+            /* var cont_out = ''
+            var cont_out1 = '' */
+            /*  oclassify_item[0].className = "classify-item active"; */
+            for (let i = 0; i < oclassify_item.length; i++) {
+                oclassify_item[i].index = i
+                oclassify_item[i].onclick = function () {
+                    for (j = 0; j < oclassify_item.length; j++) {
+                        oclassify_item[j].classList.remove('active');
+                    }
+                    this.classList.add('active');
+                    axios.get('http://vueshop.glbuys.com/api/home/category/show?token=1ec949a15fb709370f', {
+                        params: {
+                            cid: parseInt(this.index) + 492
+                        }
+                    }).then((res) => {
+                        var mes = res.data.data
+                        /* console.log(mes); */
+                        var oddata = ''
+                        var total1 = ''
+                        if (res.data.status == 1) {
+                            for (i = 0; i < mes.length; i++) {
+                                if (mes[i].goods != null) {
+                                    for (j = 0; j < mes[i].goods.length; j++) {
+                                        var mes1 = mes[i].goods[j]
+                                        total1 += `
+                                    <ul>
+                                    	<li><img src="${mes1.image}" alt="" /></li>
+                                    	<li>${mes1.title}</li>
+                                    </ul>
+		                             `
+                                    }
+                                }
+                                oddata += `
+                                 <div class="goods-wrap">
+                                	<div class="classify-name">${mes[i].title}</div>
+                                	<div class="goods-items-wrap">
+                                		${total1}
+                                	</div>
+                                </div>
+                                 `
+                                total1 = ''
+                            }
+                        } else {
+                            oddata = `
+                                <div class="no-data" style="">没有相关商品！</div>
+                                `
+                        }
+                        document.querySelector('#goods-content_li').innerHTML = oddata;
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

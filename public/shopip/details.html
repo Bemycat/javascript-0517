@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>裙装</title>
+    <link rel="stylesheet" href="./css/details.css">
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/swiper-bundle.min.css">
+    <style>
+        .load {
+            width: 0.6rem;
+            height: 0.6rem;
+            background-image: url("/images/load.gif");
+            background-size: 100%;
+            position: fixed;
+            z-index: 10000;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+    </style>
+</head>
+
+<body style="font-size: 16px;">
+    <div class="nav_header">
+        <!-- 商品  详情 评价-->
+        <div class="details-header">
+            <a class="back" href="./shopipng1.html"></a>
+            <div class="tab-wrap">
+                <div id="tab-name1" class="active">商品</div>
+                <div id="tab-name2">详情</div>
+                <div id="tab-name3">评价</div>
+            </div>
+            <div id="cart-icon" class="cart-icon">
+                <div class="spot" style="display: none;"></div>
+            </div>
+        </div>
+
+        <!-- 商品  -->
+        <div class="sub-page" style="display: block;">
+            <div class="page">
+                <!-- 轮播图 -->
+                <div class="swiper-container">
+                    <div class="swiper-wrapper "></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+
+                <!-- 商品详情 -->
+                <div class="goods-ele-main"></div>
+                <div class="reviews-main">
+                    <div class="reviews-title tipl">商品评价(10)</div>
+                    <div class="reviews_yinc">
+                        <div class="reviews-wrap">
+                            <div class="reviews-list"></div>
+                            <div class="reviews-list"></div>
+                        </div>
+                        <div class="reviews-more">查看更多评价</div>
+                    </div>
+                    <div class="no-data" id="no-data1" style="display: none;">暂无评价！</div>
+                </div>
+                <div class="bottom-btn-wrap">
+                    <div class="btn fav">收藏</div>
+                    <div class="btn cart">加入购物车</div>
+                </div>
+                <div class="mask" style="display: none;"></div>
+                <div class="cart-panel down" style="display: none;">
+                    <div class="goods-info">
+                        <div class="close-panel-wrap">
+                            <div class="spot"></div>
+                            <div class="line"></div>
+                            <div class="close"></div>
+                        </div>
+                        <div class="goods-img"><img src="" alt=""> </div>
+                        <div class="goods-wrap">
+                            <!-- <div class="goods-title">裙装裙装6</div>
+                            <div class="price">¥100</div>
+                            <div class="goods-code">商品编码:714246965</div> -->
+                        </div>
+                    </div>
+                    <div class="attr-wrap">
+                        <div class="attr-list">
+                            <div class="attr-name">颜色</div>
+                            <div class="val-wrap"></div>
+                        </div>
+                        <div class="attr-list">
+                            <div class="attr-name">尺寸</div>
+                            <div class="val-wrap"></div>
+                        </div>
+                    </div>
+                    <div class="amount-wrap">
+                        <div class="amount-name">购买数量</div>
+                        <div class="amount-input-wrap">
+                            <div class="btn dec active">-</div>
+                            <div class="amount-input">
+                                <input type="text" class="tel" placeholder="1">
+                            </div>
+                            <div class="btn inc">+</div>
+                        </div>
+                    </div>
+                    <div class="sure-btn">确定</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 详情 -->
+        <div class="sub-page">
+            <div class="page">
+                <div class="content"></div>
+            </div>
+        </div>
+
+        <!-- 评价 -->
+        <div id="sub-page1" class="sub-page">
+            <div class="page" id="page">
+                <div class="reviews-main">
+                    <div class="reviews-title tipl">商品评价(10)</div>
+                    <div class="reviews_yinc">
+                        <div class="reviews-wrap">
+                            <div class="reviews-list"></div>
+                            <div class="reviews-list"></div>
+                        </div>
+                    </div>
+                    <div class="no-data" id="no-data2" style="display: none;">暂无评价！</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="load" style="display: none;"></div>
+    <div class="van-toast van-toast--middle van-toast--text" style="z-index: 20005; display: none;">
+        <div class="van-toast__text">请登录会员</div>
+    </div>
+
+    <script src="./js/details.js"></script>
+    <script src="./js/swiper-bundle.min.js"></script>
+
+    <script src="../javascripts/axios.js"></script>
+    <script src="../javascripts/better-scroll.js"></script>
+    <script src="../javascripts/template-web.js"></script>
+
+    <script>
+        /* 商品信息 */
+        axios.get('http://vueshop.glbuys.com/api/home/goods/info?gid='
+            + window.localStorage.getItem('gid') + '&type=details&token=1ec949a15fb709370f').then((res) => {
+                /* console.log(res.data); */
+                var oswiper_container = document.querySelector('.swiper-wrapper');
+                /* console.log(oswiper_container);
+                console.log(res.data.data.images.length); */
+                /* 轮播图渲染 */
+                for (var i = 0; i < res.data.data.images.length; i++) {
+                    oswiper_container.innerHTML += `
+                    <div class="swiper-slide" style="width: 375px;">
+                        <img src="${res.data.data.images[i]}" alt="">
+                    </div>
+                 `
+                };
+
+                var mySwiper = new Swiper('.swiper-container', {
+                    autoplay: true, //启动自动切换
+                    loop: true, // 循环模式选项
+                    speed: 100, //切换速度
+                    /*   effect: "flip", //实现3D效果 */
+                    //initialSlide :1,//设置为1后，Swiper初始化时activeSlide成了第2个
+
+                    // 如果需要分页器
+                    pagination: {
+                        el: '.swiper-pagination',
+                    },
+                });
+
+                var ogoods_ele_main = document.querySelector('.goods-ele-main');
+                /*  console.log(res.data.data.price); */
+                ogoods_ele_main.innerHTML = `
+            <div class="goods-title">${res.data.data.title}</div>
+                <div class="price">¥${res.data.data.price}</div>
+                    <ul class="sales-wrap">
+                        <li>快递：10元</li>
+                        <li>月销量0件</li>
+                    </ul>
+            `
+                var ocontent = document.querySelector('.content');
+                /* console.log(res.data.data.bodys); */
+                ocontent.innerHTML = `
+                 ${res.data.data.bodys}
+             `
+                var ogoods_wrap = document.querySelector('.goods-wrap');
+                ogoods_wrap.innerHTML = `
+                <div class="goods-title">${res.data.data.title}</div>
+                <div class="price">¥${res.data.data.price}</div>
+                <div class="goods-code">商品编码:714246965</div>
+            `
+                var ogoods_img = document.querySelector('.goods-img');
+                /* console.log(res.data.data.images); */
+                ogoods_img.innerHTML = `<img src="${res.data.data.images[0]}" alt="">`
+                /*   console.log(res.data.data.title);
+                  console.log(res.data.data.price);
+                  console.log(res.data.data.images[0]); */
+            });
+
+        /* 商品评价数据渲染 */
+        axios.get('http://vueshop.glbuys.com/api/home/reviews/index?gid='
+            + window.localStorage.getItem('gid') + '&token=1ec949a15fb709370f&page=1').then((res) => {
+                /* console.log(res.data.data); */
+                /* var oreviews_title = document.querySelectorAll('.reviews-main');
+                console.log(res.data.pageinfo.total);
+                for (var i = 0; i < oreviews_title.length; i++) {
+                    console.log(res.data.pageinfo);
+                    oreviews_title[i].innerHTML += `<div class="reviews-title tipl">商品评价(${res.data.pageinfo.total})</div>`
+                } */
+                var oreviews_main = document.querySelectorAll('.reviews-list');
+                /* console.log(oreviews_main); */
+                for (var j = 0; j < oreviews_main.length; j++) {
+                    /*   console.log(oreviews_main.length); */
+                    for (var i = 0; i < res.data.data.length; i++) {
+                        /* console.log(res.data.data.length); */
+                        if (res.data.status == 0) {
+                            document.querySelector('.reviews-more').style.display = 'none';
+                            document.querySelector('#no-data1').style.display = 'block';
+                            document.querySelector('#no-data2').style.display = 'block';
+                            oreviews_main[j].innerHTML = ``
+                        } else if (res.data.status == 1) {
+                            oreviews_main[j].innerHTML += `
+                     <div class="uinfo">
+                        <div class="head"><img src="${res.data.data[i].head}" alt=""></div>
+                        <div class="nickname">${res.data.data[i].nickname}</div>
+                     </div>
+                    <div class="reviews-content">${res.data.data[i].content}</div>
+                    <div class="reviews-date">${res.data.data[i].times}</div>
+                `
+                        }
+                    }
+                }
+                var oreviews_more = document.querySelector('.reviews-more');
+                oreviews_more.onclick = function () {
+                    document.querySelector('.sub-page').style.display = 'none';
+                    document.querySelector('#sub-page1').style.display = 'block';
+                    document.querySelector('#tab-name1').className = "tab-name1"
+                    document.querySelector('#tab-name3').className = "active tab-name3"
+                }
+            })
+
+        /* 颜色 尺寸数据 */
+        axios.get('http://vueshop.glbuys.com/api/home/goods/info?gid='
+            + window.localStorage.getItem('gid') + '&type=spec&token=1ec949a15fb709370f').then((res) => {
+                /*   console.log(res.data); */
+                var oreviews_main = document.querySelectorAll('.val-wrap');
+                /*  console.log(oreviews_main); */
+                /*  console.log(res.data.data[0].values.length); */
+                for (var i = 0; i < res.data.data[0].values.length; i++) {
+                    oreviews_main[0].innerHTML += `<div class="val">${res.data.data[0].values[i].value}</div>`
+                }
+
+                /* console.log(res.data.data[1].values.length); */
+                for (var i = 0; i < res.data.data[1].values.length; i++) {
+                    oreviews_main[1].innerHTML += `<div class="val">${res.data.data[1].values[i].value}</div>`
+                }
+
+            }).then((res) => { /* 颜色 尺寸 点击事件 */
+                var sure_btn = document.querySelector('.sure-btn');
+                var oval_wrap1 = document.querySelectorAll('.val-wrap')[0];
+                var _oval = oval_wrap1.children;
+                // console.log(_oval);
+                for (var i = 0; i < _oval.length; i++) {
+                    _oval[i].index = i;
+                    _oval[i].onclick = function () {
+                        for (var j = 0; j < _oval.length; j++) {
+                            _oval[j].className = 'val';
+                            this.className = "val active";
+                        }
+                    }
+                }
+                var oval_wrap1 = document.querySelectorAll('.val-wrap')[1];
+                var _ova2 = oval_wrap1.children;
+                /* console.log(oval_wrap1); */
+                for (var i = 0; i < _ova2.length; i++) {
+                    _ova2[i].index = i;
+                    _ova2[i].onclick = function () {
+                        for (var j = 0; j < _ova2.length; j++) {
+                            _ova2[j].className = 'val';
+                        }
+                        this.className = "val active";
+                    }
+                }
+                document.querySelector('#cart-icon').onclick = function () {
+                    window.location.href = "Shopping_Cart.html";
+                }
+
+                /* 点击弹出颜色提示 */
+                sure_btn.onclick = function () {
+                    for (var i = 0; i < _oval.length; i++) {
+                        _oval[i].index = i;
+                        if (_oval[i].classList.contains('active') == true) {
+                            console.log(_oval[this.index].innerHTML);
+                        }
+
+                        if (_oval[i].classList.contains('active') == false) {
+                            document.querySelector('.van-toast__text').innerHTML = '请选择颜色';
+                        } else {
+                            document.querySelector('.van-toast__text').innerHTML = '请选择尺寸';
+                        }
+                    }
+                    for (var l = 0; l < _ova2.length; l++) {
+                        if (_ova2[l].classList.contains('active') == false) {
+                            document.querySelector('.van-toast__text').innerHTML = '请选择尺寸';
+                        } else {
+                            alert('成功');
+                        }
+                    }
+                    document.querySelector('.van-toast').style.display = 'block';
+                    setTimeout(function () {
+                        document.querySelector('.van-toast').style.display = 'none';
+                    }, 1500);
+                }
+            })
+    </script>
+</body>
+
+</html>

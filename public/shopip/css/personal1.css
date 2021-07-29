@@ -1,0 +1,299 @@
+html {
+    -webkit-tap-highlight-color: transparent;
+    font-size: 50.026668294270834px;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* 我的主页 */
+.heade_top {
+    width: 100%;
+    height: 1rem;
+    background-color: #fff;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    border-bottom: 1px solid #efefef;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    justify-content: space-between;
+    padding: 0 .1rem;
+    box-sizing: border-box;
+}
+
+.heade_top .personal_nav {
+    width: .8rem;
+    height: .8rem;
+    background: url()no-repeat;
+    background-size: 100%;
+    background-position: 50%;
+}
+
+.heade_top .personal_Center {
+    width: 79%;
+    height: auto;
+    font-size: .32rem;
+    text-align: center;
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.nickname_to {
+    width: 100%;
+    height: 2.8rem;
+    background: url(../images/images/user/my/mybg.png)no-repeat;
+    background-size: 100%;
+    background-position: top;
+    margin-top: 1.02rem;
+    position: relative;
+    z-index: 1;
+}
+
+.nickname_to .head_portrait {
+    width: 1.2rem;
+    height: 1.2rem;
+    position: absolute;
+    z-index: 1;
+    left: 5%;
+    bottom: 15%;
+}
+
+.nickname_to .head_portrait img {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+}
+
+.nickname_to .name_gr {
+    width: auto;
+    height: auto;
+    white-space: nowrap;
+    position: absolute;
+    z-index: 1;
+    top: 55%;
+    left: 27%;
+    font-size: .24rem;
+    color: #fff;
+}
+
+.nickname_to .integral {
+    width: auto;
+    height: auto;
+    white-space: nowrap;
+    position: absolute;
+    z-index: 1;
+    top: 70%;
+    left: 27%;
+    font-size: .24rem;
+    color: #fff;
+}
+
+.orders {
+    width: 100%;
+    height: .8rem;
+    background-color: #fff;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    margin-bottom: 1px;
+}
+
+.orders .all_orders {
+    font-size: .28rem;
+    margin-left: 3%;
+}
+
+.orders .view_all_orders {
+    font-size: .24rem;
+    margin-right: 3%;
+}
+
+.payment {
+    width: 80%;
+    height: 1.4rem;
+    background-color: #fff;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.payment .payment_t {
+    width: 1rem;
+    height: auto;
+}
+
+.payment .payment_i {
+    width: .5rem;
+    height: .5rem;
+    margin: 0 auto;
+}
+
+.payment .payment_img1 {
+    background: url(../images/images/user/my/pay.png)no-repeat;
+    background-size: 100%;
+    background-position: 50%;
+}
+
+.payment .payment_img2 {
+    background: url(../images/images/user/my/shouhuo.png)no-repeat;
+    background-size: 100%;
+    background-position: 50%;
+}
+
+.payment .payment_img3 {
+    background: url(../images/images/user/my/comment.png)no-repeat;
+    background-size: 100%;
+    background-position: 50%;
+}
+
+.payment .payment_text {
+    width: 100%;
+    font-size: .24rem;
+    text-align: center;
+}
+
+.information_uli {
+    width: 100%;
+    height: 7rem;
+    background-color: #fff;
+    margin-top: .3rem;
+}
+
+.information_uli ul {
+    width: 87%;
+    height: .8rem;
+    border-bottom: 1px solid #efefef;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10%;
+    padding-right: 3%;
+}
+
+.information_uli ul li:last-child {
+    width: .4rem;
+    height: .4rem;
+    background: url(../images/images/common/right_arrow.png)no-repeat;
+    background-size: 100%;
+    background-position: 50%;
+}
+
+.sign_in {
+    display: inline-block;
+    width: 70%;
+    height: .8rem;
+    margin: 0 auto;
+    background-color: #e51b19;
+    border-radius: 5px;
+    font-size: .32rem;
+    color: #fff;
+    text-align: center;
+    line-height: .8rem;
+    margin-top: .4rem;
+    margin-left: 15%;
+}
+
+/* 底部开始 */
+.botton-btn {
+    width: 100%;
+    height: 1.2rem;
+    background-color: #fff;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 .5rem;
+    box-sizing: border-box;
+}
+
+.botton-btn ul {
+    width: 1rem;
+    text-align: center;
+    position: relative;
+}
+
+.botton-btn ul li:first-child {
+    width: .6rem;
+    height: .6rem;
+    margin: 0 auto;
+}
+
+.botton-btn ul:last-child {
+    color: red;
+}
+
+.botton-btn ul .spot {
+    width: .2rem;
+    height: .2rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
+    background-color: #eb1625;
+    border-radius: 100%;
+}
+
+.botton-btn ul:first-child li:first-child {
+    background: url(../images/images/common/home1.png)no-repeat;
+    background-size: 100%;
+    background-position: 50%;
+}
+
+.botton-btn .active11:first-child li:first-child {
+    background: url(../images/images/common/home2.png)no-repeat;
+    background-size: 100%;
+    background-position: 50%;
+}
+
+.botton-btn ul:nth-child(2) li:first-child {
+    background: url(../images/images/common/cart1.png)no-repeat;
+    background-size: 100%;
+    background-position: 50%;
+}
+
+.botton-btn .active11:nth-child(2) li:first-child {
+    background: url(../images/images/common/cart2.png)no-repeat;
+    background-size: 100%;
+    background-position: 50%;
+}
+
+.botton-btn ul:last-child li:first-child {
+    background: url(../images/images/common/my1.png)no-repeat;
+    background-size: 100%;
+    background-position: 50%;
+}
+
+.botton-btn .active11:last-child li:first-child {
+    background: url(../images/images/common/my2.png)no-repeat;
+    background-size: 100%;
+    background-position: 50%;
+}
+
+.load {
+    width: 0.6rem;
+    height: 0.6rem;
+    background-image: url(../images/images/common/load.gif);
+    background-size: 100%;
+    position: fixed;
+    z-index: 10000;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}

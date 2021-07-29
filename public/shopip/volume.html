@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/volume.css">
+</head>
+
+<body>
+    <div class="page">
+        <div class="search-top">
+            <div class="search-header">
+                <a href="./search_menu.html" class="back"></a>
+                <div class="search-wrap">
+                    <div class="search-icon"></div>
+                    <div class="search-text"></div>
+                </div>
+                <div class="screen-btn">筛选</div>
+            </div>
+
+            <div class="order-main">
+                <div class="order-item">
+                    <div class="order-text">综合</div>
+                    <div class="order-icon">
+                        <ul class="order-menu" style="display: none;">
+                            <li class="active">综合</li>
+                            <li>价格从低到高</li>
+                            <li>价格从高到低</li>
+                        </ul>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-text">销量</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="goods-main">
+            <!-- <div class="goods-list">
+                <div class="image"><img src="./images/images/home/index/banner_1.jpg" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">摇椅</div>
+                    <div class="price">¥355.00</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">摇椅</div>
+                    <div class="price">¥355.00</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">摇椅</div>
+                    <div class="price">¥355.00</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">摇椅</div>
+                    <div class="price">¥355.00</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">摇椅</div>
+                    <div class="price">¥355.00</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="no-data" style="display: none;">没有相关商品！</div> -->
+        </div>
+        <div class="mask" style="display: none;"></div>
+        <div class="screen unmove">
+            <div
+                style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+                <div class="attr-wrap">
+                    <div class="attr-title-wrap">
+                        <div class="attr-name">分类</div>
+                        <div class="attr-icon"></div>
+                    </div>
+                    <div class="item-wrap"></div>
+                </div>
+                <div style="width: 100%; height: 1px; background-color: rgb(239, 239, 239);"></div>
+                <div class="attr-wrap">
+                    <div class="attr-title-wrap">
+                        <div class="attr-name">价格区间</div>
+                        <div class="price-wrap">
+                            <div class="price-input">
+                                <input type="tel" placeholder="最低价">
+                            </div>
+                            <div class="price-line"></div>
+                            <div class="price-input">
+                                <input type="tel" placeholder="最高价">
+                            </div>
+                        </div>
+                        <div class="attr-icon"></div>
+                    </div>
+                    <div class="item-wrap">
+                        <div class="item">1-50</div>
+                        <div class="item">1-50</div>
+                        <div class="item">1-50</div>
+                        <div class="item">1-50</div>
+                        <div class="item">1-50</div>
+                        <div class="item">4001-9999</div>
+                    </div>
+                </div>
+                <div style="width: 100%; height: 0.3rem; background-color: rgb(239, 239, 239);"></div>
+                <div>
+                    <div style="width: 100%; height: 1px; background-color: rgb(239, 239, 239);"></div>
+                </div>
+                <div style="width: 100%; height: 1.2rem;"></div>
+            </div>
+            <div class="handel-wrap">
+                <div class="item ">
+                    共<span>75</span>件
+                </div>
+                <div class="item reset">全部重置</div>
+                <div class="item sure">确定</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/volume.js"></script>
+    <script src="../javascripts/template-web.js"></script>
+    <script src="../javascripts/better-scroll.js"></script>
+    <script src="../javascripts/axios.js"></script>
+    <script>
+        var ogoods_wrap1 = document.querySelector('.goods-main');
+        axios.get('/string2').then((res) => {
+            /*  console.log(res.data.list.data[2].items); */
+
+            ogoods_wrap1.innerHTML =
+                `
+            <div class="goods-list">
+                <div class="image"><img src="${res.data.list.data[0].items[0].image}" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">${res.data.list.data[0].items[0].title}</div>
+                    <div class="price">¥${res.data.list.data[0].items[0].price}</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="${res.data.list.data[0].items[1].image}" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">${res.data.list.data[0].items[1].title}</div>
+                    <div class="price">¥${res.data.list.data[0].items[1].price}</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="${res.data.list.data[0].items[2].image}" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">${res.data.list.data[0].items[2].title}</div>
+                    <div class="price">¥${res.data.list.data[0].items[2].price}</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="${res.data.list.data[0].items[3].image}" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">${res.data.list.data[0].items[3].title}</div>
+                    <div class="price">¥${res.data.list.data[0].items[3].price}</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="${res.data.list.data[0].items[4].image}" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">${res.data.list.data[0].items[4].title}</div>
+                    <div class="price">¥${res.data.list.data[0].items[4].price}</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="${res.data.list.data[0].items[5].image}" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">${res.data.list.data[0].items[5].title}</div>
+                    <div class="price">¥${res.data.list.data[0].items[5].price}</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="${res.data.list.data[0].items[6].image}" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">${res.data.list.data[0].items[6].title}</div>
+                    <div class="price">¥${res.data.list.data[0].items[6].price}</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="${res.data.list.data[1].items[0].image}" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">${res.data.list.data[1].items[0].title}</div>
+                    <div class="price">¥${res.data.list.data[1].items[0].price}</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="${res.data.list.data[1].items[1].image}" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">${res.data.list.data[1].items[1].title}</div>
+                    <div class="price">¥${res.data.list.data[1].items[1].price}</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="${res.data.list.data[1].items[2].image}" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">${res.data.list.data[1].items[2].title}</div>
+                    <div class="price">¥${res.data.list.data[1].items[2].price}</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="${res.data.list.data[1].items[3].image}" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">${res.data.list.data[1].items[3].title}</div>
+                    <div class="price">¥${res.data.list.data[1].items[3].price}</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="${res.data.list.data[1].items[4].image}" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">${res.data.list.data[1].items[4].title}</div>
+                    <div class="price">¥${res.data.list.data[1].items[4].price}</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="${res.data.list.data[1].items[5].image}" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">${res.data.list.data[1].items[5].title}</div>
+                    <div class="price">¥${res.data.list.data[1].items[5].price}</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="${res.data.list.data[2].items[0].image}" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">${res.data.list.data[2].items[0].title}</div>
+                    <div class="price">¥${res.data.list.data[2].items[0].price}</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="${res.data.list.data[2].items[1].image}" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">${res.data.list.data[2].items[1].title}</div>
+                    <div class="price">¥${res.data.list.data[2].items[1].price}</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="${res.data.list.data[2].items[2].image}" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">${res.data.list.data[2].items[2].title}</div>
+                    <div class="price">¥${res.data.list.data[2].items[2].price}</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="${res.data.list.data[2].items[3].image}" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">${res.data.list.data[2].items[3].title}</div>
+                    <div class="price">¥${res.data.list.data[2].items[3].price}</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="${res.data.list.data[2].items[4].image}" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">${res.data.list.data[2].items[4].title}</div>
+                    <div class="price">¥${res.data.list.data[2].items[4].price}</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="${res.data.list.data[2].items[5].image}" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">${res.data.list.data[2].items[5].title}</div>
+                    <div class="price">¥${res.data.list.data[2].items[5].price}</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            <div class="goods-list">
+                <div class="image"><img src="${res.data.list.data[2].items[6].image}" alt=""></div>
+                <div class="goods-content">
+                    <div class="goods-title">${res.data.list.data[2].items[6].title}</div>
+                    <div class="price">¥${res.data.list.data[2].items[6].price}</div>
+                    <div class="sales">销量<span>0</span>件</div>
+                </div>
+            </div>
+            `
+
+            var oclothing_dl = document.querySelectorAll('.goods-list');
+            /* console.log(oclothing_dl.length);
+             console.log(res) */
+            /*  console.log(res.data.list.data[1].items[1].gid); */
+            for (let i = 0; i < oclothing_dl.length; i++) {
+                oclothing_dl[i].onclick = function () {
+                    window.localStorage.setItem('gid', res.data.list.data[i].items[0].gid);
+                    window.location.href = "details.html";
+                }
+            }
+        });
+    </script>
+
+    <!-- 左侧渲染 -->
+    <script id="aaa1" type="text/html">
+        {{each idnb}}
+            <div class="item">{{$value.title}}</div>
+        {{/each}}
+    </script>
+    <script>
+        var sportsList1 = document.querySelector('.item-wrap');
+        axios.get('/list5').then((res) => {
+            /*  console.log(res.data.idnb); */
+            sportsList1.innerHTML = template('aaa1', res.data);
+
+            var oitem_wrap1 = document.querySelectorAll('.item-wrap')[0];
+            var oattr = document.querySelectorAll('.attr-icon')[0];
+            var off = true;
+            oattr.onclick = function () {
+                if (off) {
+                    oitem_wrap1.style.display = 'none';
+                    oattr.className = 'attr-icon up'
+                } else {
+                    oitem_wrap1.style.display = 'block';
+                    oitem_wrap1.style.display = 'flex'
+                    oattr.className = 'attr-icon'
+                }
+                off = !off
+            }
+
+            var oitem_wrap2 = document.querySelectorAll('.item-wrap')[1];
+            var oattr1 = document.querySelectorAll('.attr-icon')[1];
+            var off = true;
+            oattr1.onclick = function () {
+                if (off) {
+                    oitem_wrap2.style.display = 'none';
+                    oattr1.className = 'attr-icon up'
+                } else {
+                    oitem_wrap2.style.display = 'block';
+                    oitem_wrap2.style.display = 'flex'
+                    oattr1.className = 'attr-icon'
+                }
+                off = !off
+            }
+
+            var aoitem_wrap = oitem_wrap1.children;
+            /* console.log(aoitem_wrap); */
+            aoitem_wrap[0].classList.add('active');
+            for (var i = 0; i < aoitem_wrap.length; i++) {
+                aoitem_wrap[i].index = i;
+                aoitem_wrap[i].onclick = function () {
+                    for (var j = 0; j < aoitem_wrap.length; j++) {
+                        aoitem_wrap[j].className = 'item';
+                        this.className = "item active";
+                    }
+                }
+            }
+
+            var aoitem_wrap1 = oitem_wrap2.children;
+            /* console.log(aoitem_wrap1); */
+            for (var i = 0; i < aoitem_wrap1.length; i++) {
+                aoitem_wrap1[i].index = i;
+                aoitem_wrap1[i].onclick = function () {
+                    for (var j = 0; j < aoitem_wrap1.length; j++) {
+                        aoitem_wrap1[j].className = 'item';
+                        this.className = "item active";
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
